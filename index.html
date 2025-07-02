@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Innovators Club</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a148c;
+            --secondary: #7b1fa2;
+            --accent: #e91e63;
+            --light: #f5f5f5;
+            --dark: #212121;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        /* Navbar */
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 2.5rem;
+            margin-top: 0.2rem;
+            opacity: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 1.5;
+            line-height: 1;
+        }
+        
+        /* Carousel */
+        .carousel-item img {
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 5px;
+        }
+        
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background: var(--accent);
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        /* Team Cards */
+        .team-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .team-img {
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        /* Events */
+        .event-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .event-date {
+            background-color: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        /* Gallery */
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        /* Contact */
+        .contact-info i {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-right: 1rem;
+        }
+        
+        .form-control {
+            border-radius: 5px;
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 0.2rem rgba(233, 30, 99, 0.25);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-links h5 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Canvas Animation */
+        .canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .carousel-item img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">University Innovators</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#events">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#team">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Carousel -->
+    <section id="home" class="hero">
+        <div class="canvas-container">
+            <canvas id="canvas-bg"></canvas>
+        </div>
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-title animated-text">Innovate. Collaborate. Create.</h1>
+                    <p class="hero-subtitle animated-text">Join the premier innovation club at your university</p>
+                    <div class="d-flex gap-3">
+                        <a href="#contact" class="btn btn-light btn-lg px-4 animated-text mb-5 gsap-4 mt-4">Join Us</a>
+                        <a href="#events" class="btn btn-outline-light btn-lg px-4 animated-text mb-5 gsap-4 mt-4">Events</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                        </div>
+                        <div class="carousel-inner rounded-3">
+                            <div class="carousel-item active">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/268e64b2-f840-4f4b-bf9f-a7a9ef8a845d.png" class="d-block w-100" alt="University students collaborating on a project in a modern lab setting with computers and whiteboards">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://thumbs.dreamstime.com/b/multiethnic-university-high-school-students-discussing-projects-brainstorming-ideas-brainstorm-sit-table-library-363178236.jpg" class="d-block w-100" alt="Group of diverse students presenting their projects at a university innovation showcase event">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/91b3d98a-b1dc-4c9c-a94b-3dd803b2de76.png" class="d-block w-100" alt="Students working together outdoors on campus with laptops and documents spread out on a table">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title text-center">About Us</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <svg id="about-svg" viewBox="0 0 500 400" class="w-100"></svg>
+                </div>
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <h3 class="mb-3">Who We Are</h3>
+                    <p>The University Innovators Club is a student-run organization dedicated to fostering innovation, creativity, and collaboration among students across all disciplines.</p>
+                    
+                    <h3 class="mb-3 mt-4">Our Mission</h3>
+                    <p>We aim to provide a platform for students to explore their ideas, develop practical skills, and connect with like-minded innovators through workshops, hackathons, and networking events.</p>
+                    
+                    <div class="mt-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-check-circle text-primary me-2"></i>
+                            <span>Monthly innovation workshops</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-check-circle text-primary me-2"></i>
+                            <span>Annual hackathon competition</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-check-circle text-primary me-2"></i>
+                            <span>Industry expert talks</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-primary me-2"></i>
+                            <span>Collaboration with local startups</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Upcoming Events</h2>
+            <div class="row g-4">
+                <!-- Event 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="event-card h-100">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cd0fb086-0fcb-4565-8e48-69fbc0a61cfb.png" class="card-img-top" alt="Brainstorm session with post-it notes covering a wall in different colors">
+                        <div class="p-4">
+                            <div class="event-date mb-3">Oct 15, 2025</div>
+                            <h4>Innovation Workshop</h4>
+                            <p class="text-muted">Learn design thinking methodologies and brainstorm solutions for real-world problems.</p>
+                            <div class="d-flex justify-content-between mt-4">
+                                <span class="text-primary"><i class="fas fa-map-marker-alt me-2"></i>Main Hall</span>
+                                <span class="text-primary"><i class="fas fa-clock me-2"></i>3:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="event-card h-100">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bdfb35a9-e015-4a56-acfc-d1b0c3eb7750.png" class="card-img-top" alt="Nighttime coding competition with glowing monitors and focused participants">
+                        <div class="p-4">
+                            <div class="event-date mb-3">Nov 5-6, 2025</div>
+                            <h4>24-Hour Hackathon</h4>
+                            <p class="text-muted">Build and present your project to judges from top tech companies with prizes up to $5000.</p>
+                            <div class="d-flex justify-content-between mt-4">
+                                <span class="text-primary"><i class="fas fa-map-marker-alt me-2"></i>Tech Lab</span>
+                                <span class="text-primary"><i class="fas fa-clock me-2"></i>5:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="event-card h-100">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/10988ada-7b09-42b7-9230-058eae9a593a.png" class="card-img-top" alt="Speaker presenting to an engaged audience with projector screen in background">
+                        <div class="p-4">
+                            <div class="event-date mb-3">July 10, 2025</div>
+                            <h4>Entrepreneur Speaker Series</h4>
+                            <p class="text-muted">Hear from successful entrepreneurs about turning ideas into viable businesses.</p>
+                            <div class="d-flex justify-content-between mt-4">
+                                <span class="text-primary"><i class="fas fa-map-marker-alt me-2"></i>Auditorium</span>
+                                <span class="text-primary"><i class="fas fa-clock me-2"></i>11:00 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section">
+        <div class="container">
+            <h2 class="section-title text-center">Our Team</h2>
+            <div class="row g-4">
+                <!-- President -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-card h-100">
+                        <img src="https://t4.ftcdn.net/jpg/05/19/89/97/360_F_519899761_kH6DsNBvULXhoSN2MVil1IUsRpSTNxvC.jpg" class="team-img w-100" alt="Serious-looking young man in blazer, president of the club">
+                        <div class="p-4 text-center">
+                            <h4>Rajendra Yadav</h4>
+                            <p class="text-muted">President</p>
+                            <p class="small">Computer Science Senior</p>
+                            <div class="social-icons mt-3">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- VP -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-card h-100">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/09c8b23d-5a11-4d00-8af8-26c8a0501a04.png" class="team-img w-100" alt="Smiling young woman with curly hair, club vice president">
+                        <div class="p-4 text-center">
+                            <h4>Neha Singh</h4>
+                            <p class="text-muted">Vice President</p>
+                            <p class="small">Business Administration</p>
+                            <div class="social-icons mt-3">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tech Lead -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-card h-100">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0fcf1c35-3237-470a-8a11-fbca5aa0c5bc.png" class="team-img w-100" alt="Young man with glasses coding on laptop, technical lead">
+                        <div class="p-4 text-center">
+                            <h4></h4>
+                            <p class="text-muted">Tech Lead</p>
+                            <p class="small">Electrical Engineering</p>
+                            <div class="social-icons mt-3">
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-stack-overflow"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Outreach -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-card h-100">
+                        <img src="https://t4.ftcdn.net/jpg/05/54/83/37/360_F_554833794_Phs1g2p60UnLpY7V7MhNV9MBOQSaQakl.jpg" class="team-img w-100" alt="Energetic young woman gesturing while speaking, outreach coordinator">
+                        <div class="p-4 text-center">
+                            <h4>Sharda Patel</h4>
+                            <p class="text-muted">Outreach Coordinator</p>
+                            <p class="small">Marketing & Communications</p>
+                            <div class="social-icons mt-3">
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-facebook"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Gallery</h2>
+            <div class="row g-3">
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/22a193e5-34cc-449d-8223-5730df63f73b.png" class="w-100" alt="Team photo from last year's hackathon with participants holding trophies">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/497222d7-147a-4383-bd19-e06c1415546a.png" class="w-100" alt="Workshop session showing students building circuit boards">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/aacf29c3-3edb-450e-a13c-2a9a03983ad4.png" class="w-100" alt="Guest speaker from Google presenting to our club members">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d8a2d476-4191-4456-a6f6-4d0d77efddce.png" class="w-100" alt="Field trip visiting a local tech startup office space">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/76fc2b6a-97e6-4fd1-9540-9331ec169511.png" class="w-100" alt="Brainstorming session with students clustered around whiteboards">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/31deb29b-3e97-4386-9148-7b712d985346.png" class="w-100" alt="Campus innovation fair with student projects on display">
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-primary">View More Photos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title text-center">Contact Us</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3 class="mb-4">Get In Touch</h3>
+                    <div class="contact-info mb-4">
+                        <div class="d-flex mb-3">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h5>Address</h5>
+                                <p>Student Center, Room 205<br>University Campus, City Kangra, Himachal Pradesh</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h5>Email</h5>
+                                <p>innovate@university.edu</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h5>Phone</h5>
+                                <p>+91 76456-78904</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="mb-4 mt-5">Meeting Times</h3>
+                    <p>We meet every Wednesday at 6:00 PM in the Student Center. Everyone is welcome!</p>
+                    
+                    <div class="social-icons mt-5">
+                        <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Your Name">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Subject">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h4>University Innovators</h4>
+                    <p class="mt-3">Empowering students to innovate and create impactful solutions for tomorrow's challenges.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Quick Links</h5>
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#events">Events</a>
+                        <a href="#team">Team</a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Resources</h5>
+                        <a href="#">Projects</a>
+                        <a href="#">Workshops</a>
+                        <a href="#">Partners</a>
+                        <a href="#">Blog</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Newsletter</h5>
+                    <p class="mb-3">Subscribe to our newsletter for the latest updates.</p>
+                    <form class="d-flex">
+                        <input type="email" class="form-control me-2" placeholder="Your Email">
+                        <button class="btn btn-outline-light">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4" style="background-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+                <p class="mb-0">© 2025 University Innovators Club. All rights reserved.</p><hr>
+                <p>Designed & Developed ❤️ by Pavan Kushwaha</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4" style="width: 50px; height: 50px;">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- GSAP Animation -->
+    <script>
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // GSAP animations for text
+            gsap.from('.hero-title', {
+                duration: 1.5,
+                y: 50,
+                opacity: 0.9,
+                ease: "power3.out"
+            });
+            
+            gsap.from('.hero-subtitle', {
+                duration: 1.5,
+                y: 50,
+                opacity: 0.6,
+                delay: 0.3,
+                ease: "power3.out"
+            });
+            
+            gsap.from('.animated-text', {
+                duration: 1.5,
+                y: 50,
+                opacity: 0,
+                delay: 0.6,
+                stagger: 0.2,
+                ease: "power3.out"
+            });
+            
+            // Section animations as they come into view
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 1
+                });
+            });
+            
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.style.backgroundColor = 'rgba(74, 20, 140, 0.95)';
+                    navbar.style.padding = '0.5rem 0';
+                } else {
+                    navbar.style.backgroundColor = 'var(--primary)';
+                    navbar.style.padding = '1rem 0';
+                }
+            });
+            
+            // Back to top button
+            const backToTopBtn = document.querySelector('.back-to-top');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopBtn.style.display = 'flex';
+                    backToTopBtn.style.alignItems = 'center';
+                    backToTopBtn.style.justifyContent = 'center';
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            });
+            
+            // Canvas background animation
+            const canvas = document.getElementById('canvas-bg');
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                const ctx = canvas.getContext('2d');
+                
+                // Particle system
+                const particles = [];
+                const particleCount = 50;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        size: Math.random() * 3 + 1,
+                        speedX: Math.random() * 0.5 - 0.25,
+                        speedY: Math.random() * 0.5 - 0.25,
+                        opacity: Math.random() * 0.5 + 0.1
+                    });
+                }
+                
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    
+                    // Draw particles
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                    for (let i = 0; i < particles.length; i++) {
+                        const p = particles[i];
+                        
+                        // Update position
+                        p.x += p.speedX;
+                        p.y += p.speedY;
+                        
+                        // Bounce off edges
+                        if (p.x > canvas.width || p.x < 0) p.speedX *= -1;
+                        if (p.y > canvas.height || p.y < 0) p.speedY *= -1;
+                        
+                        // Draw particle
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    
+                    requestAnimationFrame(animate);
+                }
+                
+                animate();
+                
+                // Handle resize
+                window.addEventListener('resize', function() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                });
+            }
+            
+            // SVG animation for About section
+            const svg = document.getElementById('about-svg');
+            if (svg) {
+                const svgNS = "http://www.w3.org/2000/svg";
+                const paths = [];
+                const circlePositions = [
+                    {x: 100, y: 100, r: 50},
+                    {x: 150, y: 200, r: 30},
+                    {x: 250, y: 150, r: 40},
+                    {x: 350, y: 100, r: 25},
+                    {x: 300, y: 250, r: 35}
+                ];
+                
+                // Create circles
+                circlePositions.forEach(pos => {
+                    const circle = document.createElementNS(svgNS, "circle");
+                    circle.setAttribute("cx", pos.x);
+                    circle.setAttribute("cy", pos.y);
+                    circle.setAttribute("r", pos.r);
+                    circle.setAttribute("fill", "none");
+                    circle.setAttribute("stroke", "#4a148c");
+                    circle.setAttribute("stroke-width", "3");
+                    svg.appendChild(circle);
+                    
+                    // Animate circles
+                    gsap.from(circle, {
+                        duration: 2,
+                        attr: {r: 0},
+                        ease: "elastic.out(1, 0.5)"
+                    });
+                });
+                
+                // Create connecting lines
+                for (let i = 0; i < circlePositions.length - 1; i++) {
+                    const path = document.createElementNS(svgNS, "path");
+                    svg.appendChild(path);
+                    
+                    const start = circlePositions[i];
+                    const end = circlePositions[i+1];
+                    
+                    path.setAttribute("stroke", "#e91e63");
+                    path.setAttribute("stroke-width", "2");
+                    path.setAttribute("fill", "none");
+                    path.setAttribute("stroke-dasharray", "10,5");
+                    
+                    gsap.from(path, {
+                        duration: 1,
+                        attr: {
+                            d: `M${start.x},${start.y} L${start.x},${start.y}`,
+                            opacity: 1
+                        },
+                        ease: "power2.out"
+                    });
+                    
+                    gsap.to(path, {
+                        duration: 1,
+                        delay: 0.5,
+                        attr: {
+                            d: `M${start.x},${start.y} L${end.x},${end.y}`,
+                            opacity: 0.7
+                        },
+                        ease: "power2.out"
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

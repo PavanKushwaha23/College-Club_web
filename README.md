@@ -77,7 +77,7 @@ Use animations for a more dynamic user experience
 👨‍💻 Author
 Pavan Kushwaha
 📧 pavankushwaha23072004@gmail.com
-🔗 LinkedIn | Portfolio (Add actual links)
+
 
 📄 License
 This project is open-source under the MIT License.

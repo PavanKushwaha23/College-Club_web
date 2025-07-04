@@ -2,7 +2,7 @@
 
 # 🎓 College Club Website – Project 6
 
-🌐 **Live Demo:** [Add your deployed site link here]
+🌐 **Live Demo:** [https://wonderful-granita-0c6886.netlify.app/]
 
 ## 📖 Project Overview
 

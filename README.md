@@ -51,6 +51,10 @@ Many college clubs operate without an online platform, making it difficult to **
 - *(Optional: Netlify/GitHub Pages for deployment)*
 
 ---
+![Screenshot 2025-07-05 002528](https://github.com/user-attachments/assets/9fb47a66-8aa1-4e4e-b1be-bdd0371b0360)
+![Screenshot 2025-07-05 002528](https://github.com/user-attachments/assets/774158eb-2285-4929-af63-e46c0285017b)
+
+
 
 ## 📱 Responsive Design
 
